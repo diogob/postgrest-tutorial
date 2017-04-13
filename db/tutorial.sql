@@ -43,7 +43,7 @@ auth.encrypt_pass() RETURNS TRIGGER
   AS $$
 BEGIN
   IF tg_op = 'INSERT' OR new.pass <> old.pass THEN
-    new.pass = crypt(new.pass, gen_salt('bf'));
+    new.pass = crypt(new.pass, auth.gen_salt('bf'));
   END IF;
   RETURN new;
 END
